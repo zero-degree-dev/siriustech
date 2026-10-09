@@ -57,6 +57,9 @@ export default defineConfig([
     rules: { "fsd/boundaries": "error" },
   },
   globalIgnores([
+    ".local/**",
+    "backend/dist/**",
+    "backend/tests/**",
     ".next/**",
     "node_modules/**",
     "test-results/**",

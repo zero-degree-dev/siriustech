@@ -1,7 +1,7 @@
 import "server-only";
-/** Read only inside a future server adapter, never during build or in client code. */
+/** Server-only origin of the NestJS API, without the /api suffix. */
 export function getApiConfig() {
-  const baseUrl = process.env.API_BASE_URL;
+  const baseUrl = process.env.API_BASE_URL ?? 'http://127.0.0.1:4000';
   if (!baseUrl)
     throw new Error("API_BASE_URL is required for the HTTP adapter");
   const url = new URL(baseUrl);

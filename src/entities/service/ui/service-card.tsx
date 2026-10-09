@@ -29,9 +29,10 @@ export function ServiceCard({
       <h3 className={s.card__title}>{service.title}</h3>
       <p className={s.card__description}>{service.description}</p>
       {service.detail && <p className={s.card__detail}>{service.detail}</p>}
+      {service.priceFrom && <p className={s.card__detail}>от {service.priceFrom.toLocaleString('ru-RU')} ₽ {service.priceUnit} · {service.duration}</p>}
       {!service.category && <Icon name={service.id === "web" ? "web" : service.id === "mobile" ? "mobile" : "code"} className={s.card__art} />}
       <span className={s.card__link}>
-        Перейти к разделу
+        Обсудить услугу
         <Icon />
       </span>
     </a>

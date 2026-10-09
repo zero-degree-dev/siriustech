@@ -22,10 +22,12 @@ export function RequestForm({
   repository,
   services,
   compact = false,
+  live = false,
 }: {
   repository: RequestRepository;
   services: Service[];
   compact?: boolean;
+  live?: boolean;
 }) {
   const [data, setData] = useState(empty);
   const [errors, setErrors] = useState<RequestErrors>({});
@@ -98,7 +100,7 @@ export function RequestForm({
       className={`${s.form} ${compact ? s["form--compact"] : ""}`}
     >
       <fieldset disabled={status === "loading"} className={s.form__fields}>
-        <legend className={s.form__legend}>Демонстрационная заявка</legend>
+        <legend className={s.form__legend}>{live ? 'Заявка на проект' : 'Демонстрационная заявка'}</legend>
         <div className={s.form__grid}>
           <Input
             label="Имя и фамилия"
@@ -175,8 +177,8 @@ export function RequestForm({
         </StatusPanel>
       )}
       {status === "success" && (
-        <StatusPanel kind="success" title="Демонстрация завершена">
-          Форма заполнена верно. Данные никуда не отправлены.
+        <StatusPanel kind="success" title={live ? 'Заявка сохранена' : 'Демонстрация завершена'}>
+          {live ? 'Спасибо! Ваша заявка на обсуждение проекта сохранена.' : 'Форма заполнена верно. Данные никуда не отправлены.'}
         </StatusPanel>
       )}
     </form>

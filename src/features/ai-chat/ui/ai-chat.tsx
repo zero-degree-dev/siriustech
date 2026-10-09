@@ -3,15 +3,27 @@ import { useEffect, useRef, useState, type FormEvent } from "react";
 import { Button, Input, StatusPanel } from "@/shared/ui";
 import type { ChatMessage, ChatRepository } from "../model/types";
 import s from "./ai-chat.module.css";
-export function AiChat({ repository }: { repository: ChatRepository }) {
+export function AiChat({ repository, live = false }: { repository: ChatRepository; live?: boolean }) {
   const [text, setText] = useState("");
   const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [status, setStatus] = useState<"idle" | "loading" | "error">("idle");
   const controller = useRef<AbortController | null>(null);
   const busy = useRef(false);
+  const [ready, setReady] = useState(!repository.load);
+  const [loadError, setLoadError] = useState(false);
+  const [mode, setMode] = useState<'polza' | 'catalog'>('polza');
+  const [loadAttempt, setLoadAttempt] = useState(0);
+  useEffect(() => {
+    if (!repository.load) return;
+    const active = new AbortController();
+    repository.load(active.signal).then(data => {
+      if (!active.signal.aborted) { setMessages(data.messages); setMode(data.mode); setReady(true); }
+    }).catch(() => { if (!active.signal.aborted) setLoadError(true); });
+    return () => active.abort();
+  }, [repository, loadAttempt]);
   useEffect(() => () => controller.current?.abort(), []);
   async function send(history: ChatMessage[]) {
-    if (busy.current) return;
+    if (busy.current || !ready) return;
     busy.current = true;
     setStatus("loading");
     controller.current = new AbortController();
@@ -20,6 +32,7 @@ export function AiChat({ repository }: { repository: ChatRepository }) {
       const answer = await repository.send(history, active.signal);
       if (!active.signal.aborted) {
         setMessages([...history, answer]);
+        if (answer.mode) setMode(answer.mode);
         setStatus("idle");
       }
     } catch {
@@ -30,10 +43,10 @@ export function AiChat({ repository }: { repository: ChatRepository }) {
   }
   function submit(event: FormEvent) {
     event.preventDefault();
-    if (!text.trim() || busy.current || status === "error") return;
+    if (!text.trim() || busy.current || status === "error" || !ready) return;
     const history: ChatMessage[] = [
       ...messages,
-      { id: `user-${messages.length}`, role: "user", text: text.trim() },
+      { id: crypto.randomUUID(), role: "user", text: text.trim() },
     ];
     setMessages(history);
     setText("");
@@ -43,8 +56,20 @@ export function AiChat({ repository }: { repository: ChatRepository }) {
     <div className={s.chat}>
       <h3 className={s.chat__title}>Обсудите проект с ИИ-ассистентом</h3>
       <p className={s.chat__note}>
-        Демонстрационный режим · ответы подготовлены заранее
+        {live ? (mode === 'polza' ? 'ИИ-консультант · Polza AI · ответы по каталогу услуг' : 'Консультант по каталогу · без генеративной модели') : 'Демонстрационный режим · ответы подготовлены заранее'}
       </p>
+      {live && <p className={s.chat__note}>История сохраняется. При использовании ИИ сообщения передаются Polza AI. Цены и сроки в каталоге демонстрационные. <a href="#request">Перейти к заявке</a></p>}
+      {!ready && !loadError && <StatusPanel kind="loading" title="Подключаем консультанта">Загружаем историю…</StatusPanel>}
+      {loadError && <StatusPanel kind="error" title="Не удалось открыть диалог" actions={<Button onClick={() => { setLoadError(false); setLoadAttempt(value => value + 1); }}>Повторить подключение</Button>}>Проверьте подключение и попробуйте ещё раз.</StatusPanel>}
+      {repository.reset && <Button disabled={status === 'loading'} variant="secondary" onClick={async () => {
+        if (busy.current) return;
+        busy.current = true;
+        try {
+          await repository.reset?.();
+          setMessages([]); setText(''); setStatus('idle'); setLoadError(false); setReady(false); setLoadAttempt(value => value + 1);
+        } catch { setLoadError(true); }
+        finally { busy.current = false; }
+      }}>Удалить историю и начать заново</Button>}
       {!!messages.length && (
         <div
           className={s.chat__messages}
@@ -74,13 +99,13 @@ export function AiChat({ repository }: { repository: ChatRepository }) {
           placeholder="Опишите задачу или задайте вопрос об услуге"
           value={text}
           onChange={(e) => setText(e.target.value)}
-          disabled={status !== "idle"}
+          disabled={status !== "idle" || !ready}
           maxLength={2000}
         />
         <Button
           type="submit"
           loading={status === "loading"}
-          disabled={!text.trim() || status === "error"}
+          disabled={!text.trim() || status === "error" || !ready}
         >
           Отправить
         </Button>

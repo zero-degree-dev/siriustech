@@ -51,10 +51,6 @@
   letter-spacing: -1.35px;
   text-wrap: initial;
 }
-.hero__copy h1 span {
-  color: var(--accent-blue);
-  white-space: nowrap;
-}
 .hero__actions {
   display: flex;
   flex-wrap: wrap;
@@ -147,6 +143,10 @@
   font-size: 32px;
   font-weight: 700;
   line-height: 1.2;
+}
+.hero__copy h1 span {
+  color: var(--accent-blue);
+  white-space: nowrap;
 }
 .portfolio {
   padding: 96px 0 120px;

@@ -1,1 +1,56 @@
-{"name":"siriustech","version":"0.1.0","private":true,"scripts":{"dev":"next dev --hostname 0.0.0.0","build":"next build","start":"next start","typecheck":"tsc --noEmit","lint":"eslint . && stylelint 'src/**/*.css'","test":"vitest run","test:e2e":"playwright test"},"dependencies":{"next":"16.4.0","react":"19.2.4","react-dom":"19.2.4","server-only":"^0.0.1","three":"^0.186.1"},"devDependencies":{"@fontsource-variable/inter":"^5","@fontsource-variable/jetbrains-mono":"^5","@fontsource-variable/roboto":"^5","@playwright/test":"^1.58","@testing-library/jest-dom":"^6","@testing-library/react":"^16","@testing-library/user-event":"^14","@types/node":"^20","@types/react":"^19","@types/react-dom":"^19","eslint":"^9","eslint-config-next":"16.4.0","jsdom":"^26","stylelint":"^16","stylelint-config-standard":"^38","typescript":"^5.9.3","vitest":"^3"}}
+{
+  "name": "siriustech",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "node scripts/dev.mjs",
+    "dev:web": "next dev --hostname 0.0.0.0",
+    "dev:services": "node scripts/dev.mjs --services-only",
+    "build": "next build",
+    "start": "next start",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint . && stylelint \"src/**/*.css\"",
+    "test": "vitest run",
+    "test:e2e": "playwright test",
+    "backend:dev": "npm run dev --workspace=@siriustech/backend",
+    "backend:build": "npm run build --workspace=@siriustech/backend",
+    "backend:start": "npm run start --workspace=@siriustech/backend",
+    "db:migrate": "npm run db:migrate --workspace=@siriustech/backend",
+    "db:seed": "npm run db:seed --workspace=@siriustech/backend",
+    "db:setup": "npm run backend:build && npm run db:migrate && npm run db:seed",
+    "db:local": "node scripts/local-postgres.mjs",
+    "test:backend": "npm test --workspace=@siriustech/backend",
+    "mcp": "npm run mcp --workspace=@siriustech/backend"
+  },
+  "dependencies": {
+    "next": "16.4.0",
+    "react": "19.2.4",
+    "react-dom": "19.2.4",
+    "server-only": "^0.0.1",
+    "three": "^0.186.1"
+  },
+  "devDependencies": {
+    "@fontsource-variable/inter": "^5",
+    "@fontsource-variable/jetbrains-mono": "^5",
+    "@fontsource-variable/roboto": "^5",
+    "@playwright/test": "^1.58",
+    "@testing-library/jest-dom": "^6",
+    "@testing-library/react": "^16",
+    "@testing-library/user-event": "^14",
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "@types/three": "^0.186.0",
+    "embedded-postgres": "^17.10.0-beta.17",
+    "eslint": "^9",
+    "eslint-config-next": "16.4.0",
+    "jsdom": "^26",
+    "stylelint": "^16",
+    "stylelint-config-standard": "^38",
+    "typescript": "^5.9.3",
+    "vitest": "^3"
+  },
+  "workspaces": [
+    "backend"
+  ]
+}
