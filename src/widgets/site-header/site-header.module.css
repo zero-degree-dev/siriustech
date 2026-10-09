@@ -62,7 +62,7 @@
 }
 .header__nav a:hover,
 .header__nav .header__active {
-  color: var(--action-primary);
+  color: var(--accent-blue);
 }
 @media (prefers-reduced-motion: reduce) {
   .header__indicator[data-animated="true"] {
@@ -112,7 +112,7 @@
     border: 0;
     padding: 8px;
     background: transparent;
-    color: var(--action-primary);
+    color: var(--accent-blue);
     font-size: 14px;
   }
   .header__nav {

@@ -33,7 +33,7 @@
   padding: 8px 0;
   background: transparent;
   border: 0;
-  color: var(--action-primary);
+  color: var(--accent-blue);
   font-size: 14px;
   white-space: nowrap;
 }

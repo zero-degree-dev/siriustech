@@ -23,7 +23,6 @@ const colors = [
   ["Surface / Tinted", "#F0F7FF", "surface-tinted"],
   ["Surface / Dark", "#071324", "surface-dark"],
   ["Text / Primary", "#0F172A", "text-primary"],
-  ["Action / Primary", "#0369A1", "action-primary"],
   ["Accent / Blue", "#0284C7", "accent-blue"],
   ["Text / Secondary", "#334E68", "text-secondary"],
   ["Text / Muted", "#475569", "text-muted"],

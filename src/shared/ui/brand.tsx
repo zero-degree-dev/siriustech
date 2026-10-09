@@ -10,7 +10,7 @@ export function Brand() {
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
     >
-      <rect width="34" height="33" rx="16.5" fill="#0369A1" />
+      <rect width="34" height="33" rx="16.5" fill="var(--accent-blue)" />
       <path
         d="M17 6.5L19.4 12.7L26 13.7L21.2 18.3L22.6 24.9L17 21.5L11.4 24.9L12.8 18.3L8 13.7L14.6 12.7L17 6.5V6.5"
         stroke="white"

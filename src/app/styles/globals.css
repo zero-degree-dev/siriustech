@@ -30,7 +30,7 @@ textarea {
   -webkit-tap-highlight-color: transparent;
 }
 a {
-  color: var(--action-primary);
+  color: var(--accent-blue);
   text-underline-offset: 4px;
 }
 button {
@@ -48,7 +48,7 @@ button:disabled {
 }
 input,
 textarea {
-  caret-color: var(--action-primary);
+  caret-color: var(--accent-blue);
 }
 h1,
 h2,

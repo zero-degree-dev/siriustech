@@ -21,12 +21,12 @@
     border-color var(--motion-fast);
 }
 .button--primary {
-  background: var(--action-primary);
+  background: var(--accent-blue);
   color: white;
 }
 .button--secondary {
   background: white;
-  color: var(--action-primary);
+  color: var(--accent-blue);
   border-color: var(--accent-blue);
 }
 .button--primary:hover:not(:disabled) {
@@ -101,7 +101,7 @@
   height: 20px;
   margin: 0;
   flex-shrink: 0;
-  accent-color: var(--action-primary);
+  accent-color: var(--accent-blue);
 }
 .type--display {
   font-size: 54px;

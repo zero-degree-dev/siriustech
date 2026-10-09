@@ -34,7 +34,7 @@
   display: block;
   font-size: 12px;
   margin-bottom: 8px;
-  color: var(--action-primary);
+  color: var(--accent-blue);
 }
 .chat__message--user {
   justify-self: end;

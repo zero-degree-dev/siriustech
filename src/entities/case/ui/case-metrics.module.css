@@ -20,7 +20,7 @@
   font-size: 48px;
   font-weight: 700;
   line-height: 1.2;
-  color: var(--action-primary);
+  color: var(--accent-blue);
   font-variant-numeric: tabular-nums;
 }
 .metrics__label {
@@ -52,7 +52,7 @@
 }
 .metrics--rows .metrics__label {
   font-size: 24px;
-  color: var(--action-primary);
+  color: var(--accent-blue);
 }
 @media (max-width: 767px) {
   .metrics--rows .metrics__label {

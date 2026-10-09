@@ -100,7 +100,7 @@
 }
 .kit__measure {
   height: 32px;
-  background: var(--action-primary);
+  background: var(--accent-blue);
   margin-bottom: 16px;
   border-radius: 3px;
 }

@@ -1,0 +1,46 @@
+{
+  "images": [
+    {
+      "id": "mvideo",
+      "file": "mvideo.png",
+      "tool": "image_gen.imagegen",
+      "prompt": "Use case: photorealistic-natural. Asset type: square portfolio case photograph for the SiriusTech Russian software engineering landing page. Primary request: Two software engineers at an omnichannel retail operations desk, a large wall showing subtle order-flow visualizations, an electronics fulfillment area visible through glass. Strong central composition focused on the engineers and monitoring displays. Style: polished editorial technology photography, natural human proportions, credible enterprise environment. Cohesive deep navy and cyan-blue palette (#0284c7 accent), cool practical lighting, realistic materials, no purple, no neon glow, no stylized illustration. Composition: square crop, scene fills every edge, main subject centered within middle 70% so it survives a near-square crop. No decorative border, no white margins, no resize handles, no cursor. No company logos, no readable text, no slogans, no watermark. Screens show only abstract charts and interface shapes. Produce one standalone photograph, not a collage.",
+      "generatedFile": "/home/dude/.codex/generated_images/01a1169f-d054-72d0-8e5c-12ba001aeb9f/exec-398e3941-3880-47a4-baac-13ffe20ebc2a.png"
+    },
+    {
+      "id": "ozon",
+      "file": "ozon.png",
+      "tool": "image_gen.imagegen",
+      "prompt": "Use case: photorealistic-natural. Asset type: square portfolio case photograph for the SiriusTech Russian software engineering landing page. Primary request: A modern fulfillment warehouse with conveyors and parcels, one operator using a tablet next to automated sorting equipment. Precise architectural depth, functional warehouse details. Style: polished editorial technology photography, natural human proportions, credible enterprise environment. Cohesive deep navy and cyan-blue palette (#0284c7 accent), cool practical lighting, realistic materials, no purple, no neon glow, no stylized illustration. Composition: square crop, scene fills every edge, main subject centered within middle 70% so it survives a near-square crop. No decorative border, no white margins, no resize handles, no cursor. No company logos, no readable text, no slogans, no watermark. Screens show only abstract charts and interface shapes. Produce one standalone photograph, not a collage.",
+      "generatedFile": "/home/dude/.codex/generated_images/01a1169f-d054-72d0-8e5c-12ba001aeb9f/exec-2f5c03ac-8cbc-49b7-af87-540d9f22c728.png"
+    },
+    {
+      "id": "cdek",
+      "file": "cdek.png",
+      "tool": "image_gen.imagegen",
+      "prompt": "Use case: photorealistic-natural. Asset type: square portfolio case photograph for the SiriusTech Russian software engineering landing page. Primary request: Dispatch specialists at a logistics control desk with a large blue-toned route map on the wall and a delivery distribution hub visible through a window. Clear foreground dispatcher and route screens. Style: polished editorial technology photography, natural human proportions, credible enterprise environment. Cohesive deep navy and cyan-blue palette (#0284c7 accent), cool practical lighting, realistic materials, no purple, no neon glow, no stylized illustration. Composition: square crop, scene fills every edge, main subject centered within middle 70% so it survives a near-square crop. No decorative border, no white margins, no resize handles, no cursor. No company logos, no readable text, no slogans, no watermark. Screens show only abstract charts and interface shapes. Produce one standalone photograph, not a collage.",
+      "generatedFile": "/home/dude/.codex/generated_images/01a1169f-d054-72d0-8e5c-12ba001aeb9f/exec-ad242148-f70a-43a6-aba5-bdf9920b99ae.png"
+    },
+    {
+      "id": "lenta",
+      "file": "lenta.png",
+      "tool": "image_gen.imagegen",
+      "prompt": "Use case: photorealistic-natural. Asset type: square portfolio case photograph for the SiriusTech Russian software engineering landing page. Primary request: A retail inventory operations workspace with a specialist reviewing stock forecasts on a desktop screen, softly visible grocery shelves beyond glass. Calm convincing real-life enterprise scene. Style: polished editorial technology photography, natural human proportions, credible enterprise environment. Cohesive deep navy and cyan-blue palette (#0284c7 accent), cool practical lighting, realistic materials, no purple, no neon glow, no stylized illustration. Composition: square crop, scene fills every edge, main subject centered within middle 70% so it survives a near-square crop. No decorative border, no white margins, no resize handles, no cursor. No company logos, no readable text, no slogans, no watermark. Screens show only abstract charts and interface shapes. Produce one standalone photograph, not a collage.",
+      "generatedFile": "/home/dude/.codex/generated_images/01a1169f-d054-72d0-8e5c-12ba001aeb9f/exec-e9059fea-efad-443c-a61b-b7d05c0c56ea.png"
+    },
+    {
+      "id": "rostelecom",
+      "file": "rostelecom.png",
+      "tool": "image_gen.imagegen",
+      "prompt": "Use case: photorealistic-natural. Asset type: square portfolio case photograph for the SiriusTech Russian software engineering landing page. Primary request: Network engineers in a contemporary network operations center, equipment racks and a panoramic wall of infrastructure monitoring dashboards. Focus on one engineer and real rack hardware. Style: polished editorial technology photography, natural human proportions, credible enterprise environment. Cohesive deep navy and cyan-blue palette (#0284c7 accent), cool practical lighting, realistic materials, no purple, no neon glow, no stylized illustration. Composition: square crop, scene fills every edge, main subject centered within middle 70% so it survives a near-square crop. No decorative border, no white margins, no resize handles, no cursor. No company logos, no readable text, no slogans, no watermark. Screens show only abstract charts and interface shapes. Produce one standalone photograph, not a collage.",
+      "generatedFile": "/home/dude/.codex/generated_images/01a1169f-d054-72d0-8e5c-12ba001aeb9f/exec-2098b5a5-9786-4f7f-a221-5dec793dbfe5.png"
+    }
+  ],
+  "logos": {
+    "mvideo": "Pre-existing /landing/mvideo.svg",
+    "rostelecom": "https://www.company.rt.ru/about/identity/files/RGB_RT_logo-horizontal_main_ru.png",
+    "ozon": "https://upload.wikimedia.org/wikipedia/commons/3/39/Ozon_logo_clear.svg",
+    "cdek": "https://upload.wikimedia.org/wikipedia/commons/f/f8/CDEK_logo.svg",
+    "lenta": "https://upload.wikimedia.org/wikipedia/commons/3/3a/New_logo_of_Lenta.svg"
+  }
+}
