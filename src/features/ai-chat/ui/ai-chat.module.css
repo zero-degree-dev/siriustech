@@ -21,6 +21,11 @@
 .chat__messages {
   display: grid;
   gap: 16px;
+  max-height: 560px;
+  overflow-y: auto;
+}
+.chat__message p {
+  white-space: pre-wrap;
 }
 .chat__message {
   max-width: 85%;

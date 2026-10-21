@@ -1,6 +1,5 @@
 import { Container } from "@/shared/ui";
 import { SiteHeader } from "@/widgets/site-header";
-import { LandingServices } from "@/widgets/landing-services";
 import {
   LandingHero,
   Chronicle,
@@ -13,7 +12,7 @@ import {
 import { WorkflowStep } from "@/widgets/workflow-step";
 import { TechnologyGlobe } from "@/widgets/technology-globe";
 import s from "./home-page.module.css";
-export function HomePage({ form }: { form: React.ReactNode }) {
+export function HomePage({ form, services, chat }: { form: React.ReactNode; services: React.ReactNode; chat: React.ReactNode }) {
   return (
     <div id="top" className={s.home}>
       <a href="#main" className={s.home__skip}>
@@ -23,7 +22,8 @@ export function HomePage({ form }: { form: React.ReactNode }) {
       <main id="main">
         <LandingHero />
         <Chronicle />
-        <LandingServices />
+        {services}
+        {chat}
         <Manifest />
         <Portfolio />
         <TechnologyGlobe />
@@ -57,7 +57,7 @@ export function HomePage({ form }: { form: React.ReactNode }) {
                 </span>
               </h2>
               <p className={s.home__demo}>
-                Демонстрационная форма. Данные никуда не отправляются.
+                Оставьте контакты и выберите услугу. Заявка будет сохранена для обсуждения проекта.
               </p>
             </div>
             {form}

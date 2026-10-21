@@ -20,7 +20,7 @@ test("all text fields type during image growth and each change collapses before 
   await visual.evaluate((element) => {
     element.getAnimations({ subtree: true }).forEach((animation) => {
       animation.pause();
-      if (animation.effect?.target === element) animation.currentTime = 200;
+      if (animation.effect instanceof KeyframeEffect && animation.effect.target === element) animation.currentTime = 200;
     });
   });
   const fields = section.locator('[class*="portfolio__live"] [class*="portfolio__typed"]');

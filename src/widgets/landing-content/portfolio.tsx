@@ -128,9 +128,9 @@ export function Portfolio() {
     const button = buttonsRef.current[selected];
     if (!strip || !button) return;
     const bounds = strip.getBoundingClientRect();
-    const selected = button.getBoundingClientRect();
-    if (selected.left < bounds.left || selected.right > bounds.right) {
-      const delta = selected.left < bounds.left ? selected.left - bounds.left - 8 : selected.right - bounds.right + 8;
+    const buttonBounds = button.getBoundingClientRect();
+    if (buttonBounds.left < bounds.left || buttonBounds.right > bounds.right) {
+      const delta = buttonBounds.left < bounds.left ? buttonBounds.left - bounds.left - 8 : buttonBounds.right - bounds.right + 8;
       strip.scrollTo({ left: strip.scrollLeft + delta, behavior: reducedMotion ? "auto" : "smooth" });
     }
   }, [selected, reducedMotion]);
