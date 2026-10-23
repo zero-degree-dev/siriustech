@@ -2,6 +2,7 @@
   "name": "siriustech",
   "version": "0.1.0",
   "private": true,
+  "packageManager": "bun@1.4.2",
   "scripts": {
     "dev": "node scripts/dev.mjs",
     "dev:web": "next dev --hostname 0.0.0.0",
@@ -12,15 +13,15 @@
     "lint": "eslint . && stylelint \"src/**/*.css\"",
     "test": "vitest run",
     "test:e2e": "playwright test",
-    "backend:dev": "npm run dev --workspace=@siriustech/backend",
-    "backend:build": "npm run build --workspace=@siriustech/backend",
-    "backend:start": "npm run start --workspace=@siriustech/backend",
-    "db:migrate": "npm run db:migrate --workspace=@siriustech/backend",
-    "db:seed": "npm run db:seed --workspace=@siriustech/backend",
-    "db:setup": "npm run backend:build && npm run db:migrate && npm run db:seed",
+    "backend:dev": "bun run --filter @siriustech/backend dev",
+    "backend:build": "bun run --filter @siriustech/backend build",
+    "backend:start": "bun run --filter @siriustech/backend start",
+    "db:migrate": "bun run --filter @siriustech/backend db:migrate",
+    "db:seed": "bun run --filter @siriustech/backend db:seed",
+    "db:setup": "bun run backend:build && bun run db:migrate && bun run db:seed",
     "db:local": "node scripts/local-postgres.mjs",
-    "test:backend": "npm test --workspace=@siriustech/backend",
-    "mcp": "npm run mcp --workspace=@siriustech/backend"
+    "test:backend": "bun run --filter @siriustech/backend test",
+    "mcp": "bun run --filter @siriustech/backend mcp"
   },
   "dependencies": {
     "marked": "^18.1.1",
@@ -52,6 +53,16 @@
     "typescript": "^5.9.3",
     "vitest": "^3"
   },
+  "trustedDependencies": [
+    "@embedded-postgres/darwin-arm64",
+    "@embedded-postgres/darwin-x64",
+    "@embedded-postgres/linux-arm",
+    "@embedded-postgres/linux-arm64",
+    "@embedded-postgres/linux-ia32",
+    "@embedded-postgres/linux-ppc64",
+    "@embedded-postgres/linux-x64",
+    "@embedded-postgres/windows-x64"
+  ],
   "workspaces": [
     "backend"
   ]

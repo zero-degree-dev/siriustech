@@ -4,14 +4,14 @@
 
 ## Запуск
 
-Node.js 20.19+ и npm. Зависимости фиксирует `package-lock.json`.
+Node.js 20.19+ и [Bun](https://bun.sh) 1.4+. Зависимости фиксирует `bun.lock`.
 
 ```sh
-npm ci
-npm run dev
+bun install --frozen-lockfile
+bun run dev
 ```
 
-Откройте http://localhost:3000. `npm run dev` запускает PostgreSQL, NestJS и Next.js вместе; настройки находятся в `backend/.env` (см. [инструкцию](docs/backend.md)). Если сайт уже работает, `npm run dev:services` поднимет недостающие базу и API. Для одной демовитрины без бэкенда: `npm run dev:web` и http://localhost:3000/ui-kit. Шрифты поставляются локально из Fontsource.
+Откройте http://localhost:3000. `bun run dev` запускает PostgreSQL, NestJS и Next.js вместе; настройки находятся в `backend/.env` (см. [инструкцию](docs/backend.md)). Если сайт уже работает, `bun run dev:services` поднимет недостающие базу и API. Для одной демовитрины без бэкенда: `bun run dev:web` и http://localhost:3000/ui-kit. Шрифты поставляются локально из Fontsource.
 
 ## Структура
 

@@ -9,7 +9,7 @@
     "db:migrate": "node dist/database/migrate.js",
     "db:seed": "node dist/database/seed.js",
     "mcp": "node dist/mcp/stdio.js",
-    "test": "npm run build && node --test tests/*.test.cjs"
+    "test": "bun run build && node --test tests/*.test.cjs"
   },
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.28.0",
