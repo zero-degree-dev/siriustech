@@ -23,14 +23,19 @@ test("all text fields type during image growth and each change collapses before 
       if (animation.effect instanceof KeyframeEffect && animation.effect.target === element) animation.currentTime = 200;
     });
   });
-  const fields = section.locator('[class*="portfolio__live"] [class*="portfolio__typed"]');
+  const fields = section.locator('[class*="portfolio__live"] [data-typed-text]');
   await expect.poll(() => fields.evaluateAll((nodes) => nodes.map((node) => node.querySelectorAll('[data-visible="true"]').length))).toEqual([8, 8, 8, 4, 8, 3]);
   const imageBox = (await frame.boundingBox())!;
   const hostBox = (await visual.boundingBox())!;
   expect(imageBox.width).toBeLessThan(hostBox.width);
   await visual.evaluate((element) => element.getAnimations({ subtree: true }).forEach((animation) => animation.play()));
   await expect(section).toHaveAttribute("data-text-phase", "idle");
-  const bounds = await page.locator("#case").boundingBox();
+  // Clicking a logo can scroll the page on mobile; compare document coordinates.
+  const caseBounds = () => page.locator("#case").evaluate(element => {
+    const { width, height, x, y } = element.getBoundingClientRect();
+    return { width, height, x: x + window.scrollX, y: y + window.scrollY };
+  });
+  const bounds = await caseBounds();
   await section.getByRole("button", { name: "Кейс Ozon", exact: true }).click();
   await expect(section.getByRole("button", { name: "Кейс Ozon", exact: true })).toHaveAttribute("aria-pressed", "true");
   await expect(section).toHaveAttribute("data-case", "mvideo");
@@ -43,7 +48,7 @@ test("all text fields type during image growth and each change collapses before 
   await expect(frame.locator("img:not([hidden])")).toHaveAttribute("src", /ozon/);
   await expect(section.getByRole("heading", { level: 3 })).toHaveAccessibleName("Система управления фулфилментом");
   await expect(section).toHaveAttribute("data-text-phase", "idle");
-  expect(await page.locator("#case").boundingBox()).toEqual(bounds);
+  expect(await caseBounds()).toEqual(bounds);
   await expect(section.getByRole("button", { name: "Кейс СДЭК", exact: true })).toHaveAttribute("aria-pressed", "true", { timeout: 10000 });
   await expect(visual).toHaveAttribute("data-phase", "collapse");
   await expect(visual).toHaveAttribute("data-current", "2");
@@ -87,8 +92,8 @@ test("reduced motion supports keyboard selection and a stable responsive composi
   });
   await page.evaluate(() => document.fonts.ready);
   await page.evaluate(() => window.scrollTo(0, 0));
-  await page.screenshot({ path: `.impeccable/review/${testInfo.project.name}.png`, fullPage: true });
-  await section.screenshot({ path: `.impeccable/review/portfolio-${testInfo.project.name}.png` });
+  await page.screenshot({ path: `test-results/page-${testInfo.project.name}.png`, fullPage: true });
+  await section.screenshot({ path: `test-results/portfolio-${testInfo.project.name}.png` });
   await page.emulateMedia({ reducedMotion: "no-preference" });
   await expect(visual).toHaveAttribute("data-phase", "hold", { timeout: 20000 });
   await page.emulateMedia({ reducedMotion: "reduce" });

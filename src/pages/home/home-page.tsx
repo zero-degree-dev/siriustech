@@ -2,8 +2,6 @@ import { Container } from "@/shared/ui";
 import { SiteHeader } from "@/widgets/site-header";
 import {
   LandingHero,
-  Chronicle,
-  Manifest,
   Portfolio,
   DevelopmentStages,
   SiteFooter,
@@ -21,10 +19,8 @@ export function HomePage({ form, services, chat }: { form: React.ReactNode; serv
       <SiteHeader />
       <main id="main">
         <LandingHero />
-        <Chronicle />
         {services}
         {chat}
-        <Manifest />
         <Portfolio />
         <TechnologyGlobe />
         <DevelopmentStages>
@@ -33,7 +29,6 @@ export function HomePage({ form, services, chat }: { form: React.ReactNode; serv
               key={title}
               number={String(index + 1).padStart(2, "0")}
               title={title}
-              reverse={index % 2 === 1}
               embedded
             >
               {text}
@@ -48,16 +43,10 @@ export function HomePage({ form, services, chat }: { form: React.ReactNode; serv
           <Container className={s["home__form-grid"]}>
             <div>
               <h2 id="request-title">
-                Обсудите задачу
-                <br />с{" "}
-                <span>
-                  ведущим
-                  <br />
-                  архитектором
-                </span>
+                Расскажите о вашей задаче
               </h2>
               <p className={s.home__demo}>
-                Оставьте контакты и выберите услугу. Заявка будет сохранена для обсуждения проекта.
+                Оставьте контакты и выберите направление. Это первый шаг к обсуждению проекта, его сроков и стоимости.
               </p>
             </div>
             {form}

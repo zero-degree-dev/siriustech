@@ -9,10 +9,10 @@
   justify-content: center;
   gap: 8px;
   padding: 12px 28px;
-  border: 2px solid transparent;
+  border: 1px solid transparent;
   border-radius: var(--radius-control);
   font-size: 16px;
-  font-weight: 500;
+  font-weight: 600;
   line-height: 22px;
   text-decoration: none;
   transition:
@@ -27,10 +27,10 @@
 .button--secondary {
   background: white;
   color: var(--accent-blue);
-  border-color: var(--accent-blue);
+  border-color: var(--border-subtle);
 }
 .button--primary:hover:not(:disabled) {
-  background: var(--surface-dark);
+  background: #076593;
 }
 .button--secondary:hover:not(:disabled) {
   background: var(--surface-tinted);
@@ -54,7 +54,7 @@
   width: 100%;
   min-width: 0;
   min-height: 48px;
-  border: 2px solid transparent;
+  border: 1px solid transparent;
   border-radius: var(--radius-control);
   background: var(--surface-tinted);
   color: var(--text-primary);
@@ -63,11 +63,11 @@
   line-height: 22px;
 }
 .field__control::placeholder {
-  color: var(--accent-blue);
+  color: #697b8c;
   opacity: 1;
 }
 .field__control:focus {
-  border-color: var(--accent-blue);
+  border-color: var(--border-subtle);
 }
 .field__control:disabled {
   opacity: 0.65;
@@ -77,7 +77,7 @@
   border-color: var(--error);
 }
 .field__control--textarea {
-  border-radius: 24px;
+  border-radius: 10px;
   resize: vertical;
   min-height: 112px;
 }
@@ -149,18 +149,21 @@
 }
 .status {
   width: 100%;
+  border: 1px solid var(--border-subtle);
+  border-radius: 10px;
+  background: var(--surface-tinted);
   overflow: hidden;
 }
 .status__header {
-  background: var(--surface-dark);
-  color: white;
-  padding: 16px 24px;
+  color: var(--text-primary);
+  font-weight: 500;
+  padding: 16px 20px 0;
   font-size: 16px;
 }
 .status__body {
-  padding: 24px;
+  padding: 12px 20px 20px;
   display: grid;
-  gap: 20px;
+  gap: 16px;
   font-size: 16px;
 }
 .status__actions {

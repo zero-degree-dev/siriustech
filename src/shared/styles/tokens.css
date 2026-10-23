@@ -1,15 +1,15 @@
 :root {
   --surface-base: #fff;
-  --surface-tinted: #f0f7ff;
+  --surface-tinted: #f3f6f9;
   --surface-dark: #071324;
   --text-primary: #0f172a;
   --text-secondary: #334e68;
   --text-muted: #475569;
   --text-on-dark: #b8cddf;
-  --accent-blue: #0284c7;
+  --accent-blue: #0879af;
   --accent-cyan: #06b6d4;
   --accent-bright: #38bdf8;
-  --border-subtle: #b9d8eb;
+  --border-subtle: #dde5ec;
   --error: #a12635;
   --success: #176348;
   --space-1: 8px;
@@ -19,7 +19,7 @@
   --space-8: 64px;
   --space-12: 96px;
   --radius-card: 16px;
-  --radius-control: 32px;
+  --radius-control: 10px;
   --content-width: 1216px;
   --motion-fast: 180ms ease-out;
 }

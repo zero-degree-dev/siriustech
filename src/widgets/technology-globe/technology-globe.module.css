@@ -1,11 +1,12 @@
 .technology {
-  padding: 96px 0 120px;
+  padding: 72px 0;
   background: var(--surface-dark);
   color: var(--surface-tinted);
 }
 .technology h2 {
-  font-size: 48px;
-  line-height: 56px;
+  font-size: 42px;
+  line-height: 1.2;
+  letter-spacing: -1px;
 }
 .technology__viewport {
   position: relative;
@@ -15,7 +16,7 @@
 .technology__scene {
   position: relative;
   width: 100%;
-  height: 640px;
+  height: 520px;
   isolation: isolate;
   overflow: hidden;
   border-radius: 8px;

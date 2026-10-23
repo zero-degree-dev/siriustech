@@ -11,12 +11,9 @@ export function LandingServices({ services, loading, error, onRetry }: {
   return <section id="services" className={s.services} aria-labelledby="services-title">
     <Container>
       <div className={s.services__heading}>
-        <h2 id="services-title">Инженерные услуги высшей категории</h2>
-        <button type="button" aria-expanded={expanded} aria-controls="services-list" onClick={() => setExpanded(!expanded)}>
-          {expanded ? 'Свернуть каталог' : 'Все услуги каталога'}<Icon />
-        </button>
+        <div><p className={s.services__eyebrow}>Каталог услуг</p><h2 id="services-title">Чем можем помочь</h2></div>
+        <p className={s.services__description}>От отдельного приложения до развития вашей ИТ-системы. Выберите направление, чтобы обсудить детали.</p>
       </div>
-      <p>Демонстрационный каталог. Стоимость и сроки уточняются после обсуждения задачи.</p>
       {loading && <StatusPanel kind="loading" title="Загружаем услуги">Получаем каталог…</StatusPanel>}
       {error && <StatusPanel kind="error" title="Каталог временно недоступен" actions={<button type="button" onClick={onRetry}>Повторить</button>}>Попробуйте загрузить услуги ещё раз.</StatusPanel>}
       {!loading && !error && !services.length && <p>Каталог пока пуст.</p>}
@@ -24,6 +21,10 @@ export function LandingServices({ services, loading, error, onRetry }: {
         {services.slice(0, expanded ? services.length : 3).map((service, index) =>
           <ServiceCard key={service.id} service={service} index={index} href="#consultation" onClick={() => selectProjectService(service.id)} />)}
       </div>
+      {services.length > 3 && <div className={s.services__more}><button type="button" aria-expanded={expanded} aria-controls="services-list" onClick={() => setExpanded(!expanded)}>
+        {expanded ? 'Свернуть каталог' : 'Все услуги каталога'}<Icon />
+      </button></div>}
+      <p className={s.services__note}>Цены и сроки в учебном каталоге приведены для примера. Точная оценка зависит от задачи.</p>
     </Container>
   </section>;
 }

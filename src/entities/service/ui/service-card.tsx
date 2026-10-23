@@ -20,17 +20,17 @@ export function ServiceCard({
       onClick={onClick}
       className={`${s.card} ${hover ? s["card--hover"] : ""} ${service.category ? s["card--neutral"] : ""}`}
     >
+      <span className={s.card__icon}><Icon name={service.id === "web" ? "web" : service.id === "mobile" ? "mobile" : "code"} /></span>
       {service.category && (
         <div className={s.card__category}>
-          <span>{String(index + 1).padStart(2, "0")}</span>
+          <span className={s.card__index}>{String(index + 1).padStart(2, "0")}</span>
           {service.category}
         </div>
       )}
       <h3 className={s.card__title}>{service.title}</h3>
       <p className={s.card__description}>{service.description}</p>
       {service.detail && <p className={s.card__detail}>{service.detail}</p>}
-      {service.priceFrom && <p className={s.card__detail}>от {service.priceFrom.toLocaleString('ru-RU')} ₽ {service.priceUnit} · {service.duration}</p>}
-      {!service.category && <Icon name={service.id === "web" ? "web" : service.id === "mobile" ? "mobile" : "code"} className={s.card__art} />}
+      {service.priceFrom && <p className={s.card__price}><span>Ориентировочно</span>от {service.priceFrom.toLocaleString('ru-RU')} ₽ {service.priceUnit}<small>{service.duration}</small></p>}
       <span className={s.card__link}>
         Обсудить услугу
         <Icon />

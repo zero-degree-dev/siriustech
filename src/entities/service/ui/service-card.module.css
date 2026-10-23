@@ -1,12 +1,12 @@
 .card {
   position: relative;
-  min-height: 329px;
+  min-height: 350px;
   height: 100%;
   display: flex;
   flex-direction: column;
   gap: 16px;
-  padding: 32px;
-  border: 2px solid var(--accent-blue);
+  padding: 28px;
+  border: 1px solid var(--border-subtle);
   border-radius: 16px;
   text-decoration: none;
   color: var(--text-primary);
@@ -22,7 +22,7 @@
 .card:hover,
 .card:focus-visible,
 .card--hover {
-  background: var(--surface-tinted);
+  background: #fbfdff;
   border-color: var(--accent-blue);
 }
 .card__title {
@@ -43,7 +43,8 @@
   align-items: center;
   gap: 12px;
   font-size: 10px;
-  font-weight: 700;
+  font-weight: 500;
+  letter-spacing: 0.7px;
   text-transform: uppercase;
   color: var(--text-muted);
 }
@@ -51,30 +52,70 @@
   color: var(--accent-blue);
   font-size: 24px;
 }
-.card__detail {
+.card__icon {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
+  background: #ebf5fb;
+  color: var(--accent-blue);
+}
+.card__icon svg {
+  width: 22px;
+  height: 22px;
+}
+.card__category .card__index {
+  display: none;
+}
+.card__price {
+  margin-top: auto;
+  padding: 12px 14px;
+  background: var(--surface-tinted);
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+}
+.card__price > span {
+  display: block;
+  font-size: 10px;
+  font-weight: 400;
+  color: var(--text-muted);
+  margin-bottom: 4px;
+}
+.card__price small {
+  display: block;
   font-size: 11px;
+  font-weight: 400;
+  color: var(--text-secondary);
+  margin-top: 4px;
+}
+.card__detail {
+  position: relative;
+  z-index: 1;
+  font-size: 13px;
+  line-height: 1.6;
   color: var(--text-muted);
 }
 .card__link {
   position: relative;
   z-index: 1;
-  margin-top: auto;
-  padding-top: 16px;
+  padding-top: 4px;
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
   align-items: center;
   gap: 12px;
   color: var(--accent-blue);
-  font-size: 12px;
-  font-weight: 700;
+  font-size: 14px;
+  font-weight: 600;
 }
 .card__art {
   position: absolute;
-  right: -24px;
-  bottom: -12px;
-  width: 220px;
-  height: 220px;
-  color: var(--surface-tinted);
+  right: 24px;
+  bottom: 68px;
+  width: 56px;
+  height: 56px;
+  color: var(--border-subtle);
   stroke-width: 1;
   transition:
     color var(--motion-fast),

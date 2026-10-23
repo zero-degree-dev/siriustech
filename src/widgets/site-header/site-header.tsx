@@ -7,10 +7,10 @@ import { useNavigationIndicator } from "./use-navigation-indicator";
 const links = [
   ["#top", "Главная"],
   ["#services", "Услуги"],
+  ["#consultation", "Консультация"],
   ["#portfolio", "Портфолио"],
   ["#technologies", "Технологии"],
-  ["#workflow", "Методология"],
-  ["#contacts", "Контакты"],
+  ["#workflow", "Как работаем"],
 ];
 const sectionHrefs = links.map(([href]) => href);
 export function SiteHeader() {
@@ -78,7 +78,7 @@ export function SiteHeader() {
         href="#request"
         onClick={() => setOpen(false)}
       >
-        Заказать звонок <Icon />
+        Обсудить проект <Icon />
       </LinkButton>
     </header>
   );

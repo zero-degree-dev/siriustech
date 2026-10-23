@@ -1,14 +1,17 @@
 "use client";
-import { useEffect, useRef, useState, type FormEvent } from "react";
+import { useEffect, useId, useRef, useState, type FormEvent } from "react";
 import { Button, Input, StatusPanel } from "@/shared/ui";
 import type { ChatMessage, ChatRepository } from "../model/types";
 import s from "./ai-chat.module.css";
+import { marked } from "marked";
 export function AiChat({ repository, live = false }: { repository: ChatRepository; live?: boolean }) {
+  const inputId = useId();
   const [text, setText] = useState("");
   const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [status, setStatus] = useState<"idle" | "loading" | "error">("idle");
   const controller = useRef<AbortController | null>(null);
   const busy = useRef(false);
+  const log = useRef<HTMLDivElement>(null);
   const [ready, setReady] = useState(!repository.load);
   const [loadError, setLoadError] = useState(false);
   const [mode, setMode] = useState<'polza' | 'catalog'>('polza');
@@ -22,6 +25,9 @@ export function AiChat({ repository, live = false }: { repository: ChatRepositor
     return () => active.abort();
   }, [repository, loadAttempt]);
   useEffect(() => () => controller.current?.abort(), []);
+  useEffect(() => {
+    if (log.current) log.current.scrollTop = log.current.scrollHeight;
+  }, [messages, status]);
   async function send(history: ChatMessage[]) {
     if (busy.current || !ready) return;
     busy.current = true;
@@ -54,14 +60,14 @@ export function AiChat({ repository, live = false }: { repository: ChatRepositor
   }
   return (
     <div className={s.chat}>
-      <h3 className={s.chat__title}>Обсудите проект с ИИ-ассистентом</h3>
-      <p className={s.chat__note}>
-        {live ? (mode === 'polza' ? 'ИИ-консультант · Polza AI · ответы по каталогу услуг' : 'Консультант по каталогу · без генеративной модели') : 'Демонстрационный режим · ответы подготовлены заранее'}
-      </p>
-      {live && <p className={s.chat__note}>История сохраняется. При использовании ИИ сообщения передаются Polza AI. Цены и сроки в каталоге демонстрационные. <a href="#request">Перейти к заявке</a></p>}
-      {!ready && !loadError && <StatusPanel kind="loading" title="Подключаем консультанта">Загружаем историю…</StatusPanel>}
-      {loadError && <StatusPanel kind="error" title="Не удалось открыть диалог" actions={<Button onClick={() => { setLoadError(false); setLoadAttempt(value => value + 1); }}>Повторить подключение</Button>}>Проверьте подключение и попробуйте ещё раз.</StatusPanel>}
-      {repository.reset && <Button disabled={status === 'loading'} variant="secondary" onClick={async () => {
+      <div className={s.chat__header}>
+        <div>
+          <h3 className={s.chat__title}>Консультант по услугам</h3>
+          <p className={s.chat__note}>
+            {live ? (mode === 'polza' ? 'ИИ-ассистент · Polza AI' : 'Справочник по каталогу') : 'Демонстрационный диалог'}
+          </p>
+        </div>
+      {repository.reset && !!messages.length && <button className={s.chat__reset} type="button" aria-label="Удалить историю и начать заново" disabled={status === 'loading'} onClick={async () => {
         if (busy.current) return;
         busy.current = true;
         try {
@@ -69,10 +75,25 @@ export function AiChat({ repository, live = false }: { repository: ChatRepositor
           setMessages([]); setText(''); setStatus('idle'); setLoadError(false); setReady(false); setLoadAttempt(value => value + 1);
         } catch { setLoadError(true); }
         finally { busy.current = false; }
-      }}>Удалить историю и начать заново</Button>}
+      }}>Новый диалог</button>}
+      </div>
+      {!ready && !loadError && <StatusPanel kind="loading" title="Подключаем консультанта">Загружаем историю…</StatusPanel>}
+      {loadError && <StatusPanel kind="error" title="Не удалось открыть диалог" actions={<Button onClick={() => { setLoadError(false); setLoadAttempt(value => value + 1); }}>Повторить подключение</Button>}>Проверьте подключение и попробуйте ещё раз.</StatusPanel>}
+      {ready && !loadError && !messages.length && <div className={s.chat__welcome}>
+        <p className={s.chat__greeting}>Давайте разберём вашу задачу</p>
+        <p>Что вы хотите создать или изменить? Можно начать с одного из вопросов.</p>
+        <div className={s.chat__suggestions}>
+          {['Какая услуга мне подойдёт?', 'Сколько стоит разработка сайта?', 'Что входит в поддержку?'].map(question =>
+            <button type="button" key={question} onClick={() => {
+              setText(question);
+              document.getElementById(inputId)?.focus();
+            }}>{question}</button>)}
+        </div>
+      </div>}
       {!!messages.length && (
         <div
           className={s.chat__messages}
+          ref={log}
           role="log"
           aria-label="История диалога"
           aria-live="polite"
@@ -82,8 +103,8 @@ export function AiChat({ repository, live = false }: { repository: ChatRepositor
               key={message.id}
               className={`${s.chat__message} ${message.role === "user" ? s["chat__message--user"] : ""}`}
             >
-              <strong>{message.role === "user" ? "Вы" : "ИИ-помощник"}</strong>
-              <p>{message.text}</p>
+              <strong>{message.role === "user" ? "Вы" : "Консультант"}</strong>
+              <div dangerouslySetInnerHTML={{__html: marked.parse(message.text) }} />
             </div>
           ))}
         </div>
@@ -94,9 +115,10 @@ export function AiChat({ repository, live = false }: { repository: ChatRepositor
         aria-label="Сообщение ИИ"
       >
         <Input
+          id={inputId}
           label="Ваш запрос"
           name="message"
-          placeholder="Опишите задачу или задайте вопрос об услуге"
+          placeholder="Например, нужен сайт для компании"
           value={text}
           onChange={(e) => setText(e.target.value)}
           disabled={status !== "idle" || !ready}
@@ -111,27 +133,27 @@ export function AiChat({ repository, live = false }: { repository: ChatRepositor
         </Button>
       </form>
       {status === "loading" && (
-        <StatusPanel kind="loading" title="ИИ-помощник · Обработка запроса">
-          Уточняем информацию по вашему запросу…
+        <StatusPanel kind="loading" title="Готовим ответ">
+          Сверяемся с каталогом услуг…
         </StatusPanel>
       )}
       {status === "error" && (
         <StatusPanel
           kind="error"
-          title="ИИ-помощник · Данные временно недоступны"
+          title="Не удалось получить ответ"
           actions={
             <>
               <Button onClick={() => void send(messages)}>
                 Повторить запрос
               </Button>
-              <a href="#request">Связаться с архитектором</a>
+              <a href="#request">Оставить заявку</a>
             </>
           }
         >
-          Не удалось получить информацию об услугах. Попробуйте ещё раз или
-          обсудите задачу с архитектором.
+          Сообщение осталось в диалоге. Попробуйте отправить его ещё раз.
         </StatusPanel>
       )}
+      {live && <p className={s.chat__privacy}>История диалога сохраняется. {mode === 'polza' && 'Сообщения обрабатываются Polza AI. '}Стоимость и сроки в ответах ориентировочные.</p>}
     </div>
   );
 }

@@ -1,10 +1,10 @@
 import { test, expect, type Page } from "@playwright/test";
 
-const firstAlt = "Команда инженеров в центре мониторинга информационной безопасности";
-const thirdAlt = "Специалисты анализируют цифровые угрозы в исследовательской лаборатории";
+const firstAlt = "Два разработчика обсуждают работу за ноутбуком в светлом офисе";
+const thirdAlt = "Разработчик работает за компьютером у окна";
 
 async function openHero(page: Page) {
-  await page.goto("/");
+  await page.goto("/", { waitUntil: "domcontentloaded" });
   const hero = page.locator('section[aria-labelledby="hero-title"]');
   const visual = hero.locator("[data-phase]");
   await visual.scrollIntoViewIfNeeded();
@@ -45,7 +45,7 @@ test("the next photo stays full size under the collapsing current photo", async 
   });
   await expect(frame.getByAltText(firstAlt)).toBeVisible();
   await expect(background).toBeVisible();
-  await expect(background.locator("img:not([hidden])")).toHaveAttribute("src", /cloud-infrastructure/);
+  await expect(background.locator("img:not([hidden])")).toHaveAttribute("src", /project-workshop/);
   await expect(background).toHaveAttribute("aria-hidden", "true");
   const bounds = (await visual.boundingBox())!;
   expect(await background.boundingBox()).toEqual(bounds);
@@ -134,7 +134,7 @@ test("the current photo stays open while the next image is loading", async ({ pa
   const nextImageGate = new Promise<void>((resolve) => { releaseNext = resolve; });
   await page.route("**/_next/image?**", async (route) => {
     const src = new URL(route.request().url()).searchParams.get("url");
-    if (src?.endsWith("cloud-infrastructure.png")) await nextImageGate;
+    if (src?.endsWith("project-workshop.webp")) await nextImageGate;
     await route.continue();
   });
 

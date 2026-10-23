@@ -1,4 +1,16 @@
 import localFont from "next/font/local";
+const manropeCyrillic = localFont({
+  src: "../../node_modules/@fontsource-variable/manrope/files/manrope-cyrillic-wght-normal.woff2",
+  weight: "200 800",
+  variable: "--font-manrope-cyrillic",
+  display: "swap",
+});
+const manropeLatin = localFont({
+  src: "../../node_modules/@fontsource-variable/manrope/files/manrope-latin-wght-normal.woff2",
+  weight: "200 800",
+  variable: "--font-manrope-latin",
+  display: "swap",
+});
 const robotoCyrillic = localFont({
   src: "../../node_modules/@fontsource-variable/roboto/files/roboto-cyrillic-wght-normal.woff2",
   weight: "100 900",
@@ -42,6 +54,7 @@ const monoLatin = localFont({
   display: "swap",
 });
 export const fonts =
+  manropeCyrillic.variable + " " + manropeLatin.variable + " " +
   robotoCyrillic.variable +
   " " +
   robotoLatin.variable +

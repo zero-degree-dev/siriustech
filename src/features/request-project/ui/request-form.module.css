@@ -1,6 +1,6 @@
 .form {
   position: relative;
-  border: 2px solid var(--accent-blue);
+  border: 1px solid var(--border-subtle);
   border-radius: 16px;
   padding: 32px;
   display: grid;
@@ -8,11 +8,11 @@
 }
 .form::before,
 .form::after {
-  content: "";
+  content: none;
   position: absolute;
   width: 20px;
   height: 20px;
-  border: 2px solid var(--accent-blue);
+  border: 1px solid var(--border-subtle);
   background: white;
 }
 .form::before {
@@ -65,6 +65,7 @@
 .form--compact {
   background: var(--surface-base);
   padding: 32px;
+  box-shadow: 0 8px 24px #18344808, 0 2px 4px #18344805;
 }
 .form--compact .form__fields {
   gap: 20px;

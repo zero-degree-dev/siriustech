@@ -1,72 +1,87 @@
 .services {
-  padding: 96px 0 120px;
-  background-image: var(--cross-pattern);
-  background-size: 64px 64px;
-  animation: background-flow 10s linear infinite;
+  padding: 88px 0;
 }
-
-@keyframes background-flow {
-  0% {
-    background-position: 0 0;
-  }
-  100% {
-    background-position: 64px 64px;
-  }
-}
-
 .services__heading {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 24px;
-  margin-bottom: 64px;
+  margin-bottom: 36px;
 }
 .services__heading h2 {
-  font-size: 48px;
-  line-height: 1.15;
-  max-width: 900px;
+  font-size: clamp(30px, 3.2vw, 42px);
+  line-height: 1.2;
+  letter-spacing: -1px;
 }
-.services__heading button {
+.services__more button {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
-  padding: 8px 0;
-  background: transparent;
-  border: 0;
-  color: var(--accent-blue);
+  gap: 12px;
+  padding: 12px 20px;
+  background: var(--surface-tinted);
+  border: 1px solid var(--border-subtle);
+  border-radius: 8px;
+  color: var(--text-secondary);
   font-size: 14px;
   white-space: nowrap;
 }
-.services__heading svg {
-  width: 14px;
+.services__more svg {
+  width: 16px;
+}
+.services__description {
+  max-width: 46ch;
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--text-secondary);
+}
+.services__note {
+  margin-top: 24px;
+  font-size: 13px;
+  line-height: 1.6;
+  color: var(--text-muted);
+  text-align: center;
+}
+.services__eyebrow {
+  color: var(--accent-blue);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1.4px;
+  text-transform: uppercase;
+  margin-bottom: 14px;
+}
+.services__more {
+  display: flex;
+  justify-content: center;
+  margin-top: 28px;
+}
+.services__more button:hover {
+  color: var(--accent-blue);
+  border-color: var(--accent-blue);
 }
 .services__grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 32px;
+  gap: 20px;
 }
-@media (max-width: 1199px) {
-  .services__heading h2 {
-    font-size: 36px;
-  }
-  .services__heading {
-    align-items: start;
-    flex-direction: column;
-    gap: 16px;
-    margin-bottom: 32px;
-  }
+@media (min-width: 768px) and (max-width: 1000px) {
   .services__grid {
-    gap: 20px;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .services__grid > :last-child:nth-child(odd) {
+    grid-column: 1 / -1;
   }
 }
 @media (max-width: 767px) {
   .services {
     padding-block: 56px;
   }
-  .services__heading h2 {
-    font-size: 30px;
+  .services__heading {
+    align-items: start;
+    flex-direction: column;
+    gap: 8px;
   }
   .services__grid {
     grid-template-columns: 1fr;
+    gap: 16px;
   }
 }

@@ -1,19 +1,75 @@
 .consultation {
-  padding-block: 64px 80px;
-  background: var(--surface-tinted);
-  scroll-margin-top: 100px;
+  padding-block: 88px;
+  background: var(--surface-dark);
+  color: white;
+}
+.consultation__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.4fr);
+  gap: 64px;
+  align-items: start;
+}
+.consultation__intro {
+  display: grid;
+  gap: 24px;
+  padding-top: 12px;
+}
+.consultation__intro h2 {
+  font-size: clamp(30px, 3.2vw, 42px);
+  line-height: 1.15;
+  letter-spacing: -1px;
+}
+.consultation__intro > p:not(.consultation__eyebrow) {
+  color: var(--text-on-dark);
+  font-size: 16px;
+  line-height: 1.65;
+  max-width: 38ch;
+}
+.consultation__eyebrow {
+  color: #78c8ed;
+  font-size: 13px;
+  font-weight: 600;
+}
+.consultation__intro > a {
+  color: #78c8ed;
+  width: fit-content;
+  font-size: 14px;
+  text-decoration: none;
+}
+.consultation__intro select {
+  background: #102038;
+  border-color: #2a3e56;
+  color: white;
+}
+.consultation__intro label {
+  color: var(--text-on-dark);
+}
+.consultation__intro :focus-visible {
+  outline-color: #78c8ed;
 }
 .consultation__panel {
-  padding: 32px;
+  color: var(--text-primary);
+  min-width: 0;
   border: 1px solid var(--border-subtle);
-  border-radius: 24px;
+  border-radius: 16px;
   background: var(--surface-base);
+  overflow: hidden;
+  box-shadow: 0 12px 36px #16324a06;
+}
+@media (max-width: 1000px) {
+  .consultation__grid {
+    gap: 32px;
+    grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+  }
 }
 @media (max-width: 767px) {
   .consultation {
-    padding-block: 40px;
+    padding-block: 56px;
   }
-  .consultation__panel {
-    padding: 24px 16px;
+  .consultation__grid {
+    grid-template-columns: 1fr;
+  }
+  .consultation__intro {
+    gap: 20px;
   }
 }
