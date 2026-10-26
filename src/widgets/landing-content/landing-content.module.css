@@ -1,5 +1,5 @@
 .hero {
-  padding: 156px 0 88px;
+  padding: 132px 0 64px;
   background: linear-gradient(120deg, #fff 36%, #f3f8fc);
   border-bottom: 1px solid #edf1f5;
   overflow: clip;
@@ -29,7 +29,7 @@
   line-height: 1.13;
   letter-spacing: -1.8px;
   font-weight: 800;
-  text-wrap: initial;
+  text-wrap: balance;
 }
 .hero__description {
   font-size: 17px;
@@ -51,7 +51,8 @@
   min-width: 0;
   height: 490px;
 }
-.hero__copy h1 span {
+.hero__copy :where(h1) span {
+  display: block;
   color: var(--accent-blue);
 }
 .hero__principles {
@@ -200,7 +201,7 @@
 .workflow__list {
   display: grid;
   margin-top: 40px;
-  gap: 16px;
+  gap: 0;
 }
 .footer {
   background: var(--surface-dark);
@@ -260,7 +261,7 @@
 }
 @media (max-width: 1199px) {
   .hero {
-    padding-top: 184px;
+    padding-top: 168px;
   }
   .hero__grid {
     gap: 32px;

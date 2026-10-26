@@ -209,7 +209,7 @@
   background: #3698c5;
   border-radius: 3px 3px 0 0;
 }
-.bars > div:nth-child(odd) i {
+.bars > :where(div:nth-child(odd)) i {
   background: #0879af;
 }
 .bars span {
@@ -350,6 +350,10 @@
     top: 0;
     right: 0;
     padding: 12px;
+  }
+  .task p,
+  .task > div {
+    display: none;
   }
   .sidebar {
     width: 34px;

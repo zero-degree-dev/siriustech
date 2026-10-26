@@ -21,7 +21,7 @@ export function Portfolio() {
   return <section id="portfolio" className={layout.portfolio} aria-labelledby="portfolio-title" data-case={item.id}>
     <Container>
       <p className={layout.eyebrow}>Решения для бизнеса</p>
-      <div className={layout.portfolio__heading}><h2 id="portfolio-title">Примеры проектов</h2><p className={s.note}>Демонстрационные кейсы и показатели</p></div>
+      <div className={layout.portfolio__heading}><h2 id="portfolio-title">Примеры проектов</h2><p className={s.note}>Демонстрационные кейсы</p></div>
       <div className={s.navigation} role="group" aria-label="Выбрать кейс">
         {portfolioCases.map((project, index) => <button key={project.id} type="button" aria-label={`Кейс ${project.brand}`} aria-pressed={selected === index} aria-controls="case" onClick={() => setSelected(index)}>{project.brand}</button>)}
       </div>
@@ -33,14 +33,13 @@ export function Portfolio() {
             <div className={s.preview__table}><div className={s.preview__labels}><span>{preview.label}</span><span>Статус</span></div>{preview.rows.map((row, i) => <div className={s.preview__row} key={row}><span>{row}</span><span data-tone={i === 0 ? 'green' : i === 3 ? 'gray' : 'blue'}>{preview.states[i]}</span></div>)}</div>
             <div className={s.preview__timeline}><span>Все процессы — в одном окне</span><div><i /><i /><i /><i /><i /><i /><i /><i /><i /><i /><i /><i /></div></div>
           </div>
-          <figcaption>Концепция интерфейса · пример реализации</figcaption>
+          <figcaption>Демонстрационный интерфейс</figcaption>
         </figure>
         <div className={s.copy} key={item.id}>
           <h3 id="case-title">{item.title}</h3>
           <p className={s.description}>{item.description}</p>
           <dl className={s.metrics}>{item.metrics.map(metric => <div key={metric.label}><dt>{metric.label}</dt><dd>{metric.value}</dd></div>)}</dl>
-          <p className={s.details}>{item.details}</p>
-          <a href="#request" className={s.link}>Обсудить похожую задачу<Icon /></a>
+          <a href="#request" className={s.link}>Обсудить проект<Icon /></a>
         </div>
       </article>
     </Container>

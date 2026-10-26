@@ -36,14 +36,14 @@ export function LandingApp() {
   return <HomePage
     services={<LandingServices services={services} loading={loading} error={error} onRetry={() => { setLoading(true); setError(false); setAttempt(value => value + 1); }} />}
     chat={<section id="consultation" className={s.consultation} aria-labelledby="consultation-title"><Container className={s.consultation__grid}><div className={s.consultation__intro}>
-      <p className={s.consultation__eyebrow}>Поможем разобраться</p>
+      <p className={s.consultation__eyebrow}>Консультация</p>
       <h2 id="consultation-title">С чего начать<br />ваш проект?</h2>
-      <p>Опишите задачу консультанту. Он подскажет подходящие услуги, объяснит состав работ и сориентирует по стоимости.</p>
+      <p>Подберём услугу под вашу задачу.</p>
       <Select label="Тема консультации" value={serviceId} onChange={event => select(event.target.value)}>
         <option value="">Помогите выбрать услугу</option>
         {services.map(service => <option key={service.id} value={service.id}>{service.title}</option>)}
       </Select>
-      <a href="#request">Сразу перейти к заявке →</a>
+      <a href="#request">Оставить заявку →</a>
     </div><div className={s.consultation__panel}>
       <AiChat repository={chat} live />
     </div></Container></section>}

@@ -31,9 +31,10 @@
   max-width: 70ch;
 }
 .step--embedded {
-  padding: 28px 32px;
-  border-radius: 12px;
-  border: 1px solid var(--border-subtle);
+  padding: 22px 0;
+  border-radius: 0;
+  border: 0;
+  border-bottom: 1px solid var(--border-subtle);
   background: white;
   gap: 28px;
 }
@@ -50,7 +51,7 @@
     gap: 20px;
   }
   .step--embedded {
-    padding: 22px 18px;
+    padding: 20px 0;
   }
   .step__panel h3 {
     font-size: 20px;

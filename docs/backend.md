@@ -23,10 +23,10 @@ flowchart LR
 Из корня репозитория, где находится `package.json`:
 
 ```sh
-npm ci
+bun install --frozen-lockfile
 ```
 
-Скопируйте `.env.example` в `.env.local`, а `backend/.env.example` в `backend/.env`, если этих локальных файлов ещё нет. Не перезаписывайте настроенные файлы. В PowerShell можно использовать `Copy-Item`. Если выполнение `npm.ps1` запрещено, используйте `npm.cmd` вместо `npm`.
+Скопируйте `.env.example` в `.env.local`, а `backend/.env.example` в `backend/.env`, если этих локальных файлов ещё нет. Не перезаписывайте настроенные файлы. В PowerShell можно использовать `Copy-Item`. Установка зависимостей выполняется через Bun и `bun.lock`; команды ниже согласованы с корневым README.
 
 Для ИИ-консультанта задайте в `backend/.env`:
 
@@ -43,31 +43,31 @@ POLZA_MODEL=openai/gpt-4o-mini
 Обычный запуск всего приложения — одна команда:
 
 ```sh
-npm run dev
+bun run dev
 ```
 
 Она проверяет PostgreSQL, при необходимости запускает локальную базу, собирает NestJS, применяет миграции и seed, ждёт готовности API и запускает Next.js. Уже работающие PostgreSQL и API используются повторно. При Ctrl+C останавливаются только процессы, созданные этой командой. Для нестандартного `DATABASE_URL` сервер базы нужно запустить самостоятельно. Данные и ключ Polza сохраняются между запусками.
 
-Если фронтенд уже работает, восстановите базу и API командой `npm run dev:services`, затем обновите страницу. `npm run dev:web` запускает только фронтенд — например, для UI kit и браузерных тестов с моками.
+Если фронтенд уже работает, восстановите базу и API командой `bun run dev:services`, затем обновите страницу. `bun run dev:web` запускает только фронтенд — например, для UI kit и браузерных тестов с моками.
 
 Для раздельного запуска запустите PostgreSQL одним из способов:
 
 ```sh
 docker compose up -d postgres
 # Или без Docker, в отдельном терминале:
-npm run db:local
+bun run db:local
 ```
 
 Локальный вариант запускает PostgreSQL 17 на `127.0.0.1:5432`, сохраняет данные в `.local/postgres` и завершается по Ctrl+C. Это реальная PostgreSQL, а не эмулятор. Не запускайте оба варианта одновременно на одном порту. Для существующей БД укажите `DATABASE_URL`; кодировка должна быть UTF-8. Пароль в примере предназначен для локальной разработки.
 
 ```sh
-npm run db:setup
-npm run backend:start
+bun run db:setup
+bun run backend:start
 # В другом терминале:
-npm run dev:web
+bun run dev:web
 ```
 
-Сайт: http://localhost:3000. API: http://127.0.0.1:4000/api/health. После изменения TypeScript бэкенда выполните `npm run backend:build` и перезапустите сервер (либо `npm run backend:dev`: сборка и наблюдение за скомпилированными файлами).
+Сайт: http://localhost:3000. API: http://127.0.0.1:4000/api/health. После изменения TypeScript бэкенда выполните `bun run backend:build` и перезапустите сервер (либо `bun run backend:dev`: сборка и наблюдение за скомпилированными файлами).
 
 ## API
 
@@ -93,43 +93,20 @@ npm run dev:web
 
 ## MCP
 
-Инструменты не раскрывают заявки или историю диалогов и не изменяют данные:
+Подробное описание инструментов, ресурса, промпта, подключения через stdio/HTTP и связи с Polza собрано в едином документе [MCP в СириусТех](mcp.md). Там же описано использование Figma MCP при разработке интерфейса.
 
-- `list_services({ query? })` — каталог и поиск.
-- `get_service({ serviceId })` — подробная информация и FAQ.
-- `recommend_services({ task })` — до трёх подходящих услуг.
-- Ресурс `siriustech://services` — весь каталог.
-- Промпт `service_consultation({ task })` — сценарий консультации с использованием инструментов.
-
-Чат сайта вызывает эти же MCP-инструменты через `InMemoryTransport`, а затем передаёт проверенный контекст Polza. Внешним клиентам доступны stdio и HTTP.
-
-Для stdio выполните `npm run backend:build`. В конфигурации вашего MCP-клиента:
-
-```json
-{
-  "mcpServers": {
-    "siriustech": {
-      "command": "node",
-      "args": ["C:/absolute/path/to/siriustech/backend/dist/mcp/stdio.js"]
-    }
-  }
-}
-```
-
-Замените путь на абсолютный путь к этому репозиторию. `.env` загружается относительно backend, независимо от рабочей папки клиента. Процесс выводит в stdout только сообщения протокола. При ручном запуске используйте `node backend/dist/mcp/stdio.js`; npm может печатать служебные строки, поэтому в конфигурации клиента указан непосредственно `node`.
-
-HTTP: `http://127.0.0.1:4000/mcp`, транспорт Streamable HTTP, заголовок `Authorization: Bearer <MCP_API_TOKEN>`. Токен задаётся в `backend/.env`. Если он пустой, endpoint отключён (503). Режим stateless, POST; GET/DELETE возвращают 405. Пример JSON-RPC тела после инициализации: `{"jsonrpc":"2.0","id":2,"method":"tools/list","params":{}}`.
+Чат сайта использует MCP через `InMemoryTransport`. Внешний HTTP endpoint `/mcp` включается только при заданном `MCP_API_TOKEN`; stdio работает как отдельный локальный процесс с доступом к PostgreSQL.
 
 ## Проверки
 
 ```sh
-npm run typecheck
-npm run lint
-npm test
-npm run test:backend
-npm run build
-npx playwright install chromium
-npm run test:e2e -- tests/e2e/consultation.spec.ts tests/e2e/ui-kit.spec.ts
+bun run typecheck
+bun run lint
+bun run test
+bun run test:backend
+bun run build
+bunx playwright install chromium
+bun run test:e2e tests/e2e/catalog.spec.ts tests/e2e/consultation.spec.ts tests/e2e/ui-kit.spec.ts
 ```
 
 Тесты бэкенда сами поднимают изолированный PostgreSQL на свободном порту. Проверяют повторные миграции и seed, API, валидацию, сохранение и изоляцию диалогов, удаление, идемпотентность, реальный MCP handshake и обработку ошибок Polza. Провайдер в автоматических тестах подменяется; платных запросов они не делают. Тестовые кластеры остаются в игнорируемой папке `.local/test-postgres` для диагностики.

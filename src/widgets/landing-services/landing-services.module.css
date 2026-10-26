@@ -1,5 +1,6 @@
 .services {
-  padding: 88px 0;
+  padding: 72px 0;
+  overflow-anchor: none;
 }
 .services__heading {
   display: flex;
@@ -27,6 +28,10 @@
 }
 .services__more svg {
   width: 16px;
+  transition: transform 180ms;
+}
+.services__more button[aria-expanded='true'] svg {
+  transform: rotate(180deg);
 }
 .services__description {
   max-width: 46ch;

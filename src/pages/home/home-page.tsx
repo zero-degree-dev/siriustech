@@ -43,10 +43,10 @@ export function HomePage({ form, services, chat }: { form: React.ReactNode; serv
           <Container className={s["home__form-grid"]}>
             <div>
               <h2 id="request-title">
-                Расскажите о вашей задаче
+                Обсудим ваш проект
               </h2>
               <p className={s.home__demo}>
-                Оставьте контакты и выберите направление. Это первый шаг к обсуждению проекта, его сроков и стоимости.
+                Оставьте контакты — начнём с вашей задачи.
               </p>
             </div>
             {form}

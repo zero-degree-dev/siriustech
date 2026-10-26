@@ -16,6 +16,11 @@
     border-color var(--motion-fast);
   background-color: var(--surface-base);
 }
+.card--compact {
+  min-height: 310px;
+  gap: 14px;
+  padding: 24px;
+}
 .card--neutral {
   border-color: #e2e8f0;
 }

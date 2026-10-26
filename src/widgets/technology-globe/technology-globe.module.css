@@ -131,9 +131,7 @@
   .technology__meta {
     font-size: 8px;
   }
-  .technology__meta > span:last-child {
-    display: none;
-  }
+
   .technology__label {
     font-size: 8px;
     line-height: 12px;

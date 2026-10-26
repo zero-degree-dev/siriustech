@@ -80,8 +80,7 @@ export function AiChat({ repository, live = false }: { repository: ChatRepositor
       {!ready && !loadError && <StatusPanel kind="loading" title="Подключаем консультанта">Загружаем историю…</StatusPanel>}
       {loadError && <StatusPanel kind="error" title="Не удалось открыть диалог" actions={<Button onClick={() => { setLoadError(false); setLoadAttempt(value => value + 1); }}>Повторить подключение</Button>}>Проверьте подключение и попробуйте ещё раз.</StatusPanel>}
       {ready && !loadError && !messages.length && <div className={s.chat__welcome}>
-        <p className={s.chat__greeting}>Давайте разберём вашу задачу</p>
-        <p>Что вы хотите создать или изменить? Можно начать с одного из вопросов.</p>
+        <p className={s.chat__greeting}>Что хотите создать?</p>
         <div className={s.chat__suggestions}>
           {['Какая услуга мне подойдёт?', 'Сколько стоит разработка сайта?', 'Что входит в поддержку?'].map(question =>
             <button type="button" key={question} onClick={() => {
@@ -153,7 +152,7 @@ export function AiChat({ repository, live = false }: { repository: ChatRepositor
           Сообщение осталось в диалоге. Попробуйте отправить его ещё раз.
         </StatusPanel>
       )}
-      {live && <p className={s.chat__privacy}>История диалога сохраняется. {mode === 'polza' && 'Сообщения обрабатываются Polza AI. '}Стоимость и сроки в ответах ориентировочные.</p>}
+      {live && <p className={s.chat__privacy}>Диалог сохраняется. {mode === 'polza' && 'Обработка — Polza AI. '}Оценки ориентировочные.</p>}
     </div>
   );
 }
